@@ -1,8 +1,30 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .rendererBody {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 80vh;
+            height: 80vh;
+            margin: auto; /* Center the container itself */
+           
+        }
+    </style>
+</head>
+<body>
+    <div class="rendererBody">
+        <h3>body</h3>
+    </div>
+</body>
+</html>
