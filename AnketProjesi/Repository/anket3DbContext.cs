@@ -5,20 +5,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AnketProjesi.Repository;
 
-public partial class anket2DbContext : DbContext
+public partial class anket3DbContext : DbContext
 {
-    public anket2DbContext()
+    public anket3DbContext()
     {
     }
 
-    public anket2DbContext(DbContextOptions<anket2DbContext> options)
+    public anket3DbContext(DbContextOptions<anket3DbContext> options)
         : base(options)
     {
     }
 
     public virtual DbSet<Anket> Ankets { get; set; }
 
-    public virtual DbSet<AnketCevap> AnketCevaps { get; set; }
+    public virtual DbSet<Cevaplar> Cevaplars { get; set; }
 
     public virtual DbSet<Sorular> Sorulars { get; set; }
 
@@ -34,8 +34,6 @@ public partial class anket2DbContext : DbContext
     {
         modelBuilder.Entity<Anket>(entity =>
         {
-            entity.Property(e => e.AnketId).ValueGeneratedNever();
-
             entity.HasOne(d => d.Tip).WithMany(p => p.Ankets)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Anket_Tip");
@@ -45,15 +43,13 @@ public partial class anket2DbContext : DbContext
                 .HasConstraintName("FK_Anket_Tur");
         });
 
-        modelBuilder.Entity<AnketCevap>(entity =>
+        modelBuilder.Entity<Cevaplar>(entity =>
         {
-            entity.HasOne(d => d.CevapNavigation).WithMany()
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_AnketCevap_Anket");
+            entity.HasOne(d => d.Anket).WithMany(p => p.Cevaplars).HasConstraintName("FK_Cevaplar_Anket");
 
-            entity.HasOne(d => d.Soru).WithMany()
+            entity.HasOne(d => d.Soru).WithMany(p => p.Cevaplars)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_AnketCevap_Sorular");
+                .HasConstraintName("FK_Cevaplar_Sorular");
         });
 
         OnModelCreatingPartial(modelBuilder);

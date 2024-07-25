@@ -1,4 +1,6 @@
-﻿@{
+﻿@using AnketProjesi.Repository.Models
+@model List<Anket>
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -24,7 +26,23 @@
 </head>
 <body>
     <div class="rendererBody">
-        <h3>body</h3>
+        <table class="table table-bordered">
+            <tr>
+                <th>Kişi ID</th>
+                <th>Meslek</th>
+                <th>Durum</th>
+   
+            </tr>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td> @x.AnketId</td>
+                    <td>@x.Tur.TurName</td>
+                    <td>@x.Tip.TipName</td>
+                </tr>
+            }
+
+        </table>
     </div>
 </body>
 </html>

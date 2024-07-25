@@ -19,6 +19,9 @@ public partial class Anket
     [Column("TipID")]
     public int TipId { get; set; }
 
+    [InverseProperty("Anket")]
+    public virtual ICollection<Cevaplar> Cevaplars { get; set; } = new List<Cevaplar>();
+
     [ForeignKey("TipId")]
     [InverseProperty("Ankets")]
     public virtual Tip Tip { get; set; } = null!;

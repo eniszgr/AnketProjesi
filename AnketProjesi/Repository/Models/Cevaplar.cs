@@ -6,12 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AnketProjesi.Repository.Models;
 
-[Keyless]
-[Table("AnketCevap")]
-public partial class AnketCevap
+[Table("Cevaplar")]
+public partial class Cevaplar
 {
-    [Column("CevapID")]
-    public int CevapId { get; set; }
+    [Key]
+    [Column("ID")]
+    public int Id { get; set; }
+
+    [Column("AnketID")]
+    public int? AnketId { get; set; }
 
     [Column("SoruID")]
     public int SoruId { get; set; }
@@ -20,9 +23,11 @@ public partial class AnketCevap
     [Unicode(false)]
     public string Cevap { get; set; } = null!;
 
-    [ForeignKey("CevapId")]
-    public virtual Anket CevapNavigation { get; set; } = null!;
+    [ForeignKey("AnketId")]
+    [InverseProperty("Cevaplars")]
+    public virtual Anket? Anket { get; set; }
 
     [ForeignKey("SoruId")]
+    [InverseProperty("Cevaplars")]
     public virtual Sorular Soru { get; set; } = null!;
 }

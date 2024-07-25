@@ -13,6 +13,10 @@ public partial class Sorular
     [Column("SoruID")]
     public int SoruId { get; set; }
 
-    [MaxLength(50)]
-    public byte[] Soru { get; set; } = null!;
+    [StringLength(50)]
+    [Unicode(false)]
+    public string Soru { get; set; } = null!;
+
+    [InverseProperty("Soru")]
+    public virtual ICollection<Cevaplar> Cevaplars { get; set; } = new List<Cevaplar>();
 }

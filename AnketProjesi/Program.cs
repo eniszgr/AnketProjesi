@@ -1,4 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using AnketProjesi.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
+// Veritabaný baðlantý dizesini almak için Configuration ekleyin
+builder.Configuration.AddJsonFile("appsettings.json");
+
+// Veritabaný baðlantýsýný ekleyin
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<anket3DbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
