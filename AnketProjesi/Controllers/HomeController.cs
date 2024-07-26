@@ -11,7 +11,7 @@ namespace AnketProjesi.Controllers
 {
     public class HomeController : Controller
     {
-        public readonly anket3DbContext _context;
+        private readonly anket3DbContext _context;
 
         public HomeController(anket3DbContext context)
         {
@@ -71,12 +71,13 @@ namespace AnketProjesi.Controllers
                    Text = x.Soru
                })
                .ToList();
-     
+
             ViewBag.Sorular = sorular;
             return View();
         }
         // GPT
-        public IActionResult Deneme() {
+        public IActionResult Deneme()
+        {
             List<SelectListItem> tip = _context.Tips
                .Select(x => new SelectListItem
                {
@@ -107,43 +108,39 @@ namespace AnketProjesi.Controllers
             ViewBag.Sorular = sorular;
             return View();
         }
+
         [HttpPost]
-        public IActionResult SubmitForm(FormData formData)
+        public IActionResult SubmitForm([FromForm] FormData formData)
         {
-            if (ModelState.IsValid)
+       
+            // Yeni Anket nesnesi oluştur
+            var anket = new Anket
             {
-                // Yeni Anket nesnesi oluştur
-                var anket = new Anket
+                TipId = int.Parse(formData.Tip),
+                TurId = int.Parse(formData.Meslek)
+            };
+
+            // Anket veritabanına ekle
+            _context.Ankets.Add(anket);
+            _context.SaveChanges();
+
+            // Cevapları ekle
+            foreach (var soru in formData.Sorular)
+            {
+                var cevap = new Cevaplar
                 {
-                    TipId = _context.Tips.FirstOrDefault(t => t.TipName == formData.Tip)?.TipId ?? 0,
-                    TurId = _context.Turs.FirstOrDefault(t => t.TurName == formData.Meslek)?.TurId ?? 0
+                    AnketId = anket.AnketId,
+                    SoruId = soru.QuestionId,
+                    Cevap = soru.Rating
                 };
 
-                // Anket veritabanına ekle
-                _context.Ankets.Add(anket);
-                _context.SaveChanges();
-
-                // Cevapları ekle
-                foreach (var soru in formData.Sorular)
-                {
-                    var cevap = new Cevaplar
-                    {
-                        AnketId = anket.AnketId,
-                        SoruId = soru.QuestionId,
-                        Cevap = soru.Rating
-                    };
-
-                    _context.Cevaplars.Add(cevap);
-                }
-
-                _context.SaveChanges();
-
-                // İşlemden sonra bir onay sayfasına yönlendirin
-                return RedirectToAction("Confirmation");
+                _context.Cevaplars.Add(cevap);
             }
 
-            // Hata durumunda formu tekrar gösterin
-            return View(formData);
+            _context.SaveChanges();
+
+            // İşlemden sonra bir onay sayfasına yönlendirin
+            return RedirectToAction("Confirmation");
         }
 
         public IActionResult Confirmation()

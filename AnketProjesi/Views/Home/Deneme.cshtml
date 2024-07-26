@@ -50,7 +50,7 @@
 <body>
     <div class="form-container">
         <div class="form-box">
-            <form asp-action="SubmitForm" asp-controller="Home" class="form-group sorular" method="post">
+            <form action="/Home/SubmitForm" class="form-group sorular" method="post">
                 <h2>Tip</h2>
                 <div class="d-flex flex-wrap justify-content-start">
                     @foreach (var item in ViewBag.Tip)
@@ -80,15 +80,15 @@
                     <div class="form-check">
                         <p>@ViewBag.Sorular[i].Text</p>
                         <div class="form-check">
-                            <input type="radio" id="veryGood_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="veryGood" class="form-check-input">
+                            <input type="radio" id="veryGood_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="a" class="form-check-input">
                             <label for="veryGood_@ViewBag.Sorular[i].Value" class="form-check-label">Çok İyi</label>
                         </div>
                         <div class="form-check">
-                            <input type="radio" id="good_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="good" class="form-check-input">
+                            <input type="radio" id="good_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="b" class="form-check-input">
                             <label for="good_@ViewBag.Sorular[i].Value" class="form-check-label">İyi</label>
                         </div>
                         <div class="form-check">
-                            <input type="radio" id="bad_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="bad" class="form-check-input">
+                            <input type="radio" id="bad_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="c" class="form-check-input">
                             <label for="bad_@ViewBag.Sorular[i].Value" class="form-check-label">Kötü</label>
                         </div>
                         <input type="hidden" name="Sorular[@i].QuestionId" value="@ViewBag.Sorular[i].Value" />
@@ -101,9 +101,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        // JavaScript kodlarınızı buraya ekleyebilirsiniz
-    </script>
 </body>
 </html>
