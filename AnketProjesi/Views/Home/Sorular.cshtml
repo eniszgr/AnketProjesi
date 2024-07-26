@@ -1,0 +1,69 @@
+﻿@using AnketProjesi.Repository.Models
+@{
+    ViewData["Title"] = "Deneme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kisi Bilgisi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .sorular {
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <form asp-action="SubmitForm" asp-controller="Home" class="form-group sorular" method="post">
+        <h2> Tip </h2>
+        @foreach (var item in ViewBag.Tip)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="Tip" id="@item.Value" value="@item.Value">
+                <label class="form-check-label" for="@item.Value"> @item.Text</label>
+            </div>
+        }
+        <br>
+        <h2>Meslek</h2>
+        <br>
+        @foreach (var item in ViewBag.Tur)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="Meslek" id="@item.Value" value="@item.Value">
+                <label class="form-check-label" for="@item.Value"> @item.Text </label>
+            </div>
+        }
+        <br>
+        <h2>Sorular</h2>
+        <br>
+        @for (int i = 0; i < ViewBag.Sorular.Count; i++)
+        {
+            <div class="form-check">
+                <p>@ViewBag.Sorular[i].Text</p>
+                <div class="form-check">
+                    <input type="radio" id="veryGood_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="veryGood" class="form-check-input">
+                    <label for="veryGood_@ViewBag.Sorular[i].Value" class="form-check-label">Çok İyi</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="good_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="good" class="form-check-input">
+                    <label for="good_@ViewBag.Sorular[i].Value" class="form-check-label">İyi</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="bad_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="bad" class="form-check-input">
+                    <label for="bad_@ViewBag.Sorular[i].Value" class="form-check-label">Kötü</label>
+                </div>
+                <input type="hidden" name="Sorular[@i].QuestionId" value="@ViewBag.Sorular[i].Value" />
+            </div>
+            <br>
+        }
+        <button type="submit" class="btn btn-primary mt-3">Gönder</button>
+    </form>
+    <script>
+
+    </script>
+</body>
+</html>
