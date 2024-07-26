@@ -1,5 +1,6 @@
 ﻿using AnketProjesi.Models;
 using AnketProjesi.Repository;
+using AnketProjesi.Repository.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -74,7 +75,7 @@ namespace AnketProjesi.Controllers
             ViewBag.Sorular = sorular;
             return View();
         }
-
+        // GPT
         public IActionResult Deneme() {
             List<SelectListItem> tip = _context.Tips
                .Select(x => new SelectListItem
@@ -111,11 +112,34 @@ namespace AnketProjesi.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Form verilerini işleyin
-                // Örneğin, veritabanına kaydedin veya başka işlemler yapın
+                // Yeni Anket nesnesi oluştur
+                var anket = new Anket
+                {
+                    TipId = _context.Tips.FirstOrDefault(t => t.TipName == formData.Tip)?.TipId ?? 0,
+                    TurId = _context.Turs.FirstOrDefault(t => t.TurName == formData.Meslek)?.TurId ?? 0
+                };
+
+                // Anket veritabanına ekle
+                _context.Ankets.Add(anket);
+                _context.SaveChanges();
+
+                // Cevapları ekle
+                foreach (var soru in formData.Sorular)
+                {
+                    var cevap = new Cevaplar
+                    {
+                        AnketId = anket.AnketId,
+                        SoruId = soru.QuestionId,
+                        Cevap = soru.Rating
+                    };
+
+                    _context.Cevaplars.Add(cevap);
+                }
+
+                _context.SaveChanges();
 
                 // İşlemden sonra bir onay sayfasına yönlendirin
-                
+                return RedirectToAction("Confirmation");
             }
 
             // Hata durumunda formu tekrar gösterin
@@ -126,7 +150,6 @@ namespace AnketProjesi.Controllers
         {
             return View();
         }
-
 
     }
 }
