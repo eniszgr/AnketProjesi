@@ -42,41 +42,7 @@ namespace AnketProjesi.Controllers
 
             return View();
         }
-
-        public async Task<IActionResult> Sorular()
-        {
-            List<SelectListItem> tip = _context.Tips
-                .Select(x => new SelectListItem
-                {
-                    Value = x.TipId.ToString(),
-                    Text = x.TipName
-                })
-                .ToList();
-
-            ViewBag.Tip = tip;
-
-            List<SelectListItem> meslek = _context.Turs
-                .Select(x => new SelectListItem
-                {
-                    Value = x.TurId.ToString(),
-                    Text = x.TurName
-                })
-                .ToList();
-            ViewBag.Tur = meslek;
-
-            List<SelectListItem> sorular = _context.Sorulars
-               .Select(x => new SelectListItem
-               {
-                   Value = x.SoruId.ToString(),
-                   Text = x.Soru
-               })
-               .ToList();
-
-            ViewBag.Sorular = sorular;
-            return View();
-        }
-        // GPT
-        public IActionResult Deneme()
+        public IActionResult Anket()
         {
             List<SelectListItem> tip = _context.Tips
                .Select(x => new SelectListItem
