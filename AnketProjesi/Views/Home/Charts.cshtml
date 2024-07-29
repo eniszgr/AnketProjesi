@@ -11,16 +11,47 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <style> 
+        .charts-container {
+            display: flex;
+            flex-wrap: wrap; /* Ekran genişliğine göre grafikleri alt alta getirebilir */
+            justify-content: space-around; /* Grafikler arasındaki boşluğu ayarlamak için */
+        }
+
+        .chart {
+            width: 45%; /* Grafikleri yan yana sığdırmak için genişliği ayarlayın */
+            margin: 10px 0; /* Grafikler arasına dikey boşluk eklemek için */
+        }
+    
+    </style>
+
 </head>
 <body>
     <div class="container">
-        <h2>Cevap Sayım</h2>
+        <h2>Genel Ortalama</h2>
         <br />
         <p>A yüzdesi: @string.Format("{0:F2}", ViewData["percentA"]) %</p>
         <p>B yüzdesi: @string.Format("{0:F2}", ViewData["percentB"])%</p>
         <p>C yüzdesi: @string.Format("{0:F2}", ViewData["percentC"])%</p>
     </div>
-    <div id="grafikContainer" style="height: 300px; width: 100%;"></div>
+    
+    <div class="charts-container">    
+        <div class="chart">
+            <div id="ButunKatilimciler"></div>
+        </div>
+        <div class="chart">
+            <div id="Muhendisler"></div>
+        </div>
+        <div class="chart">
+            <div id="Kurumici"></div>
+        </div>
+      
+    </div>
+
+
+
+
+
     <script>
         
             // JavaScript değişkenlerine verileri aktarın
@@ -29,11 +60,11 @@
             var yuzdeC = parseFloat("@ViewData["percentC"]");
 
             // CanvasJS ile grafik oluşturma
-            var chart = new CanvasJS.Chart("grafikContainer", {
+        var chart = new CanvasJS.Chart("ButunKatilimciler", {
                 theme: "light2",
                 animationEnabled: true,
                 title: {
-                    text: "Anket Sonuçları",
+                    text: "Genel Anket Sonuçları",
                     fontSize: 20
                 },
                 data: [{
@@ -50,6 +81,62 @@
                 }]
             });
             chart.render();
+
+        //mühendis anket verileri çekme
+        var muhendisA = parseFloat("@ViewData["percentAMuhendis"]");
+        var muhendisB = parseFloat("@ViewData["percentBMuhendis"]");
+        var muhendisC = parseFloat("@ViewData["percentCMuhendis"]");
+
+        //charta yansıtma
+        var chart = new CanvasJS.Chart("Muhendisler", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Mühendis Anket Sonuçları",
+                fontSize: 20
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                indexLabelFontSize: 12,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: muhendisA, label: "Cevap A" },
+                    { y: muhendisB, label: "Cevap B" },
+                    { y: muhendisC, label: "Cevap C" }
+                ]
+            }]
+        });
+        chart.render();
+
+        //mühendis anket verileri çekme
+        var KurumiciA = parseFloat("@ViewData["percentAKurumici"]");
+        var KurumiciB = parseFloat("@ViewData["percentBKurumici"]");
+        var KurumiciC = parseFloat("@ViewData["percentCKurumici"]");
+
+        //charta yansıtma
+        var chart = new CanvasJS.Chart("Kurumici", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Kurumici Anket Sonuçları",
+                fontSize: 20
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                indexLabelFontSize: 12,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: KurumiciA, label: "Cevap A" },
+                    { y: KurumiciB, label: "Cevap B" },
+                    { y: KurumiciC, label: "Cevap C" }
+                ]
+            }]
+        });
+        chart.render();
         
     </script>
 </body>

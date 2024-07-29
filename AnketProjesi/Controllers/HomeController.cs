@@ -26,6 +26,7 @@ namespace AnketProjesi.Controllers
 
         public async Task<IActionResult> Charts()
         {
+            //toplam veri
             var aCount = await _context.Cevaplars.CountAsync(c => c.Cevap == "a");
             var bCount = await _context.Cevaplars.CountAsync(c => c.Cevap == "b");
             var cCount = await _context.Cevaplars.CountAsync(c => c.Cevap == "c");
@@ -39,6 +40,56 @@ namespace AnketProjesi.Controllers
             ViewData["percentA"] = percentA;
             ViewData["percentB"] = percentB;
             ViewData["percentC"] = percentC;
+
+
+            //mühendislerin verileri
+            var anketIDs = await _context.Ankets.Where(a=>a.TurId ==1)
+                                                .Select(a=>a.AnketId)
+                                                .ToListAsync();
+
+           var aCountMuhendis = await _context.Cevaplars
+                               .Where(c => anketIDs.Contains((int)c.AnketId) && c.Cevap == "a")
+                               .CountAsync();
+            var bCountMuhendis = await _context.Cevaplars
+                               .Where(c => anketIDs.Contains((int)c.AnketId) && c.Cevap == "b")
+                               .CountAsync();
+            var cCountMuhendis = await _context.Cevaplars
+                               .Where(c => anketIDs.Contains((int)c.AnketId) && c.Cevap == "c")
+                               .CountAsync();
+            var totalmuh = aCountMuhendis + bCountMuhendis+ cCountMuhendis;
+            if (totalmuh == 0)
+                totalmuh = 1;
+
+            var percentAMuhendis = ((double)aCountMuhendis / totalmuh) * 100;
+            var percentBMuhendis = ((double)bCountMuhendis / totalmuh) * 100;
+            var percentCMuhendis = ((double)cCountMuhendis / totalmuh) * 100;
+
+            ViewData["percentAMuhendis"]=percentAMuhendis;
+            ViewData["percentBMuhendis"]= percentBMuhendis;
+            ViewData["percentCMuhendis"] = percentCMuhendis;
+
+            var anketIDsKurumici = await _context.Ankets.Where(a => a.TipId == 1)
+                                                        .Select(a => a.AnketId)
+                                                        .ToListAsync();
+            var aCountKurumici = await _context.Cevaplars
+                               .Where(c => anketIDsKurumici.Contains((int)c.AnketId) && c.Cevap == "a")
+                               .CountAsync();
+            var bCountKurumici = await _context.Cevaplars
+                               .Where(c => anketIDsKurumici.Contains((int)c.AnketId) && c.Cevap == "b")
+                               .CountAsync();
+            var cCountKurumici = await _context.Cevaplars
+                               .Where(c => anketIDsKurumici.Contains((int)c.AnketId) && c.Cevap == "c")
+                               .CountAsync();
+            var totalKurumici = aCountMuhendis + bCountMuhendis + cCountMuhendis;
+
+            var percentAKurumici = ((double)aCountKurumici / totalKurumici) * 100;
+            var percentBKurumici = ((double)bCountKurumici / totalKurumici) * 100;
+            var percentCKurumici = ((double)cCountKurumici / totalKurumici) * 100;
+
+            ViewData["percentAKurumici"] = percentAKurumici;
+            ViewData["percentBKurumici"] = percentBKurumici;
+            ViewData["percentCKurumici"] = percentCKurumici;
+
 
             return View();
         }
@@ -106,7 +157,7 @@ namespace AnketProjesi.Controllers
             _context.SaveChanges();
 
             // İşlemden sonra bir onay sayfasına yönlendirin
-            return RedirectToAction("Confirmation");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Confirmation()
