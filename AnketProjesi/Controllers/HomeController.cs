@@ -202,8 +202,8 @@ namespace AnketProjesi.Controllers
 
             // ViewData ayarlama
             ViewData["percentAMemur"] = percentAMemur;
-            ViewData["percentBMemur"] = percentBMemur;
-            ViewData["percentCMemur"] = percentCMemur;
+            ViewData["percentBMemur"] = percentBMemur; //nedenini cozemedim ama percentBMemur olarak isimlendirince hatalı calısiyor
+            ViewData["percentCMemur"] = percentCMemur;//bu yüzden burada isimlendirme kuralına uyamadım
 
 
             //Müdür verileri
@@ -230,7 +230,7 @@ namespace AnketProjesi.Controllers
             var percentCMudur = ((double)cCountMudur / totalmudur) * 100;
 
             ViewData["percentAMudur"] = percentAMudur;
-            ViewData["percentBMemur"] = percentBMudur;
+            ViewData["percentBMudur"] = percentBMudur;
             ViewData["percentCMudur"] = percentCMudur;
 
 
