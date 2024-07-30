@@ -68,6 +68,7 @@ namespace AnketProjesi.Controllers
             ViewData["percentBMuhendis"]= percentBMuhendis;
             ViewData["percentCMuhendis"] = percentCMuhendis;
 
+            //Kurum ici
             var anketIDsKurumici = await _context.Ankets.Where(a => a.TipId == 1)
                                                         .Select(a => a.AnketId)
                                                         .ToListAsync();
@@ -80,7 +81,7 @@ namespace AnketProjesi.Controllers
             var cCountKurumici = await _context.Cevaplars
                                .Where(c => anketIDsKurumici.Contains((int)c.AnketId) && c.Cevap == "c")
                                .CountAsync();
-            var totalKurumici = aCountMuhendis + bCountMuhendis + cCountMuhendis;
+            var totalKurumici = aCountKurumici + bCountKurumici + cCountKurumici;
 
             var percentAKurumici = ((double)aCountKurumici / totalKurumici) * 100;
             var percentBKurumici = ((double)bCountKurumici / totalKurumici) * 100;
@@ -90,6 +91,57 @@ namespace AnketProjesi.Controllers
             ViewData["percentBKurumici"] = percentBKurumici;
             ViewData["percentCKurumici"] = percentCKurumici;
 
+
+            //Kurumdisi
+            var anketIDsKurumdisi = await _context.Ankets.Where(a => a.TipId == 2)
+                                                        .Select(a => a.AnketId)
+                                                        .ToListAsync();
+            var aCountKurumdisi = await _context.Cevaplars
+                               .Where(c => anketIDsKurumdisi.Contains((int)c.AnketId) && c.Cevap == "a")
+                               .CountAsync();
+            var bCountKurumdisi = await _context.Cevaplars
+                               .Where(c => anketIDsKurumdisi.Contains((int)c.AnketId) && c.Cevap == "b")
+                               .CountAsync();
+            var cCountKurumdisi = await _context.Cevaplars
+                               .Where(c => anketIDsKurumdisi.Contains((int)c.AnketId) && c.Cevap == "c")
+                               .CountAsync();
+            var totalKurumdisi = aCountKurumdisi + bCountKurumdisi + cCountKurumdisi;
+
+            var percentAKurumdisi = ((double)aCountKurumdisi / totalKurumdisi) * 100;
+            var percentBKurumdisi = ((double)bCountKurumdisi / totalKurumdisi) * 100;
+            var percentCKurumdisi = ((double)cCountKurumdisi / totalKurumdisi) * 100;
+
+            ViewData["percentAKurumdisi"] = percentAKurumdisi;
+            ViewData["percentBKurumdisi"] = percentBKurumdisi;
+            ViewData["percentCKurumdisi"] = percentCKurumici;
+
+
+
+            //Ogrenciler
+            var anketIDsOgrenci = await _context.Ankets.Where(a => a.TurId == 5)
+                                                        .Select(a => a.AnketId)
+                                                        .ToListAsync();
+            var aCountOgrenci = await _context.Cevaplars
+                               .Where(c => anketIDsOgrenci.Contains((int)c.AnketId) && c.Cevap == "a")
+                               .CountAsync();
+            var bCountOgrenci = await _context.Cevaplars
+                               .Where(c => anketIDsOgrenci.Contains((int)c.AnketId) && c.Cevap == "b")
+                               .CountAsync();
+            var cCountOgrenci = await _context.Cevaplars
+                               .Where(c => anketIDsOgrenci.Contains((int)c.AnketId) && c.Cevap == "c")
+                               .CountAsync();
+            var totalOgrenci = aCountOgrenci + bCountOgrenci + cCountOgrenci;
+
+            var percentAOgrenci = ((double)aCountOgrenci / totalOgrenci) * 100;
+            var percentBOgrenci = ((double)bCountOgrenci / totalOgrenci) * 100;
+            var percentCOgrenci = ((double)cCountOgrenci / totalOgrenci) * 100;
+
+            ViewData["ogrenciA"] = percentAOgrenci;
+            ViewData["ogrenciB"] = percentBOgrenci;
+            ViewData["ogrenciC"] = percentCOgrenci;
+
+
+            //kurum disi 
 
             return View();
         }
