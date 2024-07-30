@@ -24,6 +24,7 @@ namespace AnketProjesi.Controllers
             return View(ankets);
         }
 
+        //grafik sayfasi
         public async Task<IActionResult> Charts()
         {
             //toplam veri
@@ -194,6 +195,8 @@ namespace AnketProjesi.Controllers
                 .CountAsync();
 
             var totalMemur = aCountMemur + bCountMemur + cCountMemur;
+            if (totalMemur == 0)
+                totalMemur = 1;
 
             // Yüzde hesaplama
             var percentAMemur = ((double)aCountMemur / totalMemur) * 100;
@@ -232,6 +235,117 @@ namespace AnketProjesi.Controllers
             ViewData["percentAMudur"] = percentAMudur;
             ViewData["percentBMudur"] = percentBMudur;
             ViewData["percentCMudur"] = percentCMudur;
+
+
+            // ilk soru verileri
+            var soruBirIDs = await _context.Cevaplars.Where(a => a.SoruId == 1)
+                                                     .Select(a => a.Id)
+                                                     .ToListAsync();
+
+            var aCountSoruBir = await _context.Cevaplars
+                                              .Where(c => soruBirIDs.Contains((int)c.Id) && c.Cevap == "a")
+                                              .CountAsync();
+            var bCountSoruBir = await _context.Cevaplars
+                                              .Where(c => soruBirIDs.Contains((int)c.Id) && c.Cevap == "b")
+                                              .CountAsync();
+            var cCountSoruBir = await _context.Cevaplars
+                                              .Where(c => soruBirIDs.Contains((int)c.Id) && c.Cevap == "c")
+                                              .CountAsync();
+
+            var totalSoruBir = aCountSoruBir + bCountSoruBir + cCountSoruBir;
+            if (totalSoruBir == 0)
+                totalSoruBir = 1;
+
+            var percentASoruBir = ((double)aCountSoruBir / totalSoruBir) * 100;
+            var percentBSoruBir = ((double)bCountSoruBir / totalSoruBir) * 100;
+            var percentCSoruBir = ((double)cCountSoruBir / totalSoruBir) * 100;
+
+            ViewData["percentASoruBir"] = percentASoruBir;
+            ViewData["percentBSoruBir"] = percentBSoruBir;
+            ViewData["percentCSoruBir"] = percentCSoruBir;
+
+            // ikinci soru verileri
+            var soruIkiIDs = await _context.Cevaplars.Where(a => a.SoruId == 2)
+                                                     .Select(a => a.Id)
+                                                     .ToListAsync();
+
+            var aCountSoruIki = await _context.Cevaplars
+                                              .Where(c => soruIkiIDs.Contains((int)c.Id) && c.Cevap == "a")
+                                              .CountAsync();
+            var bCountSoruIki = await _context.Cevaplars
+                                              .Where(c => soruIkiIDs.Contains((int)c.Id) && c.Cevap == "b")
+                                              .CountAsync();
+            var cCountSoruIki = await _context.Cevaplars
+                                              .Where(c => soruIkiIDs.Contains((int)c.Id) && c.Cevap == "c")
+                                              .CountAsync();
+
+            var totalSoruIki = aCountSoruIki + bCountSoruIki + cCountSoruIki;
+            if (totalSoruIki == 0)
+                totalSoruIki = 1;
+
+            var percentASoruIki = ((double)aCountSoruIki / totalSoruIki) * 100;
+            var percentBSoruIki = ((double)bCountSoruIki / totalSoruIki) * 100;
+            var percentCSoruIki = ((double)cCountSoruIki / totalSoruIki) * 100;
+
+            ViewData["percentASoruIki"] = percentASoruIki;
+            ViewData["percentBSoruIki"] = percentBSoruIki;
+            ViewData["percentCSoruIki"] = percentCSoruIki;
+           
+            
+            //ucuncu soru verileri
+            var soruUcIDs = await _context.Cevaplars.Where(a => a.SoruId == 3)
+                                                     .Select(a => a.Id)
+                                                     .ToListAsync();
+
+            var aCountSoruUc = await _context.Cevaplars
+                                              .Where(c => soruUcIDs.Contains((int)c.Id) && c.Cevap == "a")
+                                              .CountAsync();
+            var bCountSoruUc = await _context.Cevaplars
+                                              .Where(c => soruUcIDs.Contains((int)c.Id) && c.Cevap == "b")
+                                              .CountAsync();
+            var cCountSoruUc = await _context.Cevaplars
+                                              .Where(c => soruUcIDs.Contains((int)c.Id) && c.Cevap == "c")
+                                              .CountAsync();
+
+            var totalSoruUc = aCountSoruUc + bCountSoruUc + cCountSoruUc;
+            if (totalSoruUc == 0)
+                totalSoruUc = 1;
+
+            var percentASoruUc = ((double)aCountSoruUc / totalSoruUc) * 100;
+            var percentBSoruUc = ((double)bCountSoruUc / totalSoruUc) * 100;
+            var percentCSoruUc = ((double)cCountSoruUc / totalSoruUc) * 100;
+
+            ViewData["percentASoruUc"] = percentASoruUc;
+            ViewData["percentBSoruUc"] = percentBSoruUc;
+            ViewData["percentCSoruUc"] = percentCSoruUc;
+
+            //ucuncu soru verileri
+            var soruDortIDs = await _context.Cevaplars.Where(a => a.SoruId == 4)
+                                                     .Select(a => a.Id)
+                                                     .ToListAsync();
+
+            var aCountSoruDort = await _context.Cevaplars
+                                              .Where(c => soruDortIDs.Contains((int)c.Id) && c.Cevap == "a")
+                                              .CountAsync();
+            var bCountSoruDort = await _context.Cevaplars
+                                              .Where(c => soruDortIDs.Contains((int)c.Id) && c.Cevap == "b")
+                                              .CountAsync();
+            var cCountSoruDort = await _context.Cevaplars
+                                              .Where(c => soruDortIDs.Contains((int)c.Id) && c.Cevap == "c")
+                                              .CountAsync();
+
+            var totalSoruDort = aCountSoruDort + bCountSoruDort + cCountSoruDort;
+            if (totalSoruDort == 0)
+                totalSoruDort = 1;
+
+            var percentASoruDort = ((double)aCountSoruDort / totalSoruDort) * 100;
+            var percentBSoruDort = ((double)aCountSoruDort / totalSoruDort) * 100;
+            var percentCSoruDort = ((double)aCountSoruDort / totalSoruDort) * 100;
+
+            ViewData["percentASoruDort"] = percentASoruDort;
+            ViewData["percentBSoruDort"] = percentBSoruDort;
+            ViewData["percentCSoruDort"] = percentCSoruDort;
+
 
 
             return View();
@@ -303,10 +417,15 @@ namespace AnketProjesi.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Confirmation()
+        public async Task<IActionResult> ChartsMain()
         {
             return View();
         }
+
+
+
+
+
 
     }
 }

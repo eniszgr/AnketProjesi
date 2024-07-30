@@ -32,6 +32,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Anket}/{id?}");
+    pattern: "{controller=Home}/{action=ChartsMain}/{id?}");
 
 app.Run();

@@ -69,6 +69,18 @@
         <div class="chart">
             <div id="Mudur"></div>
         </div>
+        <div class="chart">
+            <div id="soruBir"></div>
+        </div>
+        <div class="chart">
+            <div id="soruIki"></div>
+        </div>
+        <div class="chart">
+            <div id="soruUc"></div>
+        </div>
+        <div class="chart">
+            <div id="soruDort"></div>
+        </div>
     </div>
 
     <script>
@@ -230,7 +242,7 @@
             theme: "light2",
             animationEnabled: true,
             title: {
-                text: "Doktor Grafik Sonuçları",
+                text: "Doktor Sonuçları",
                 fontSize: 20
             },
             data: [{
@@ -258,7 +270,7 @@
             theme: "light2",
             animationEnabled: true,
             title: {
-                text: "Memur Grafik Sonuçları",
+                text: "Memur Sonuçları",
                 fontSize: 20
             },
             data: [{
@@ -285,7 +297,7 @@
             theme: "light2",
             animationEnabled: true,
             title: {
-                text: "Memur Grafik Sonuçları",
+                text: "Memur Sonuçları",
                 fontSize: 20
             },
             data: [{
@@ -302,6 +314,122 @@
             }]
         });
         chart8.render();
+        
+        // Soru Bir verilerini çekme
+        var soruBirA = parseFloat("@ViewData["percentASoruBir"]") || 0;
+        var soruBirB = parseFloat("@ViewData["percentBSoruBir"]") || 0;
+        var soruBirC = parseFloat("@ViewData["percentCSoruBir"]") || 0;
+
+        // birinci soru grafiği gösterme
+        var chart9 = new CanvasJS.Chart("soruBir", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Birinci Sorunun Sonuçları",
+                fontSize: 20
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                indexLabelFontSize: 12,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: soruBirA, label: "Cevap A" },
+                    { y: soruBirB, label: "Cevap B" },
+                    { y: soruBirC, label: "Cevap C" }
+                ]
+            }]
+        });
+        chart9.render();
+
+        // Soru iki verilerini çekme
+        var soruIkiA = parseFloat("@ViewData["percentASoruIki"]") || 0;
+        var soruIkiB = parseFloat("@ViewData["percentBSoruIki"]") || 0;
+        var soruIkiC = parseFloat("@ViewData["percentCSoruIki"]") || 0;
+
+        // ikinci soru grafiği gösterme
+        var chart10 = new CanvasJS.Chart("soruIki", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "İkinci Sorunun Sonuçları",
+                fontSize: 20
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                indexLabelFontSize: 12,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: soruIkiA, label: "Cevap A" },
+                    { y: soruIkiB, label: "Cevap B" },
+                    { y: soruIkiC, label: "Cevap C" }
+                ]
+            }]
+        });
+        chart10.render();
+
+
+        // üçüncü verilerini çekme
+        var soruUcA = parseFloat("@ViewData["percentASoruUc"]") || 0;
+        var soruUcB = parseFloat("@ViewData["percentBSoruUc"]") || 0;
+        var soruUcC = parseFloat("@ViewData["percentCSoruUc"]") || 0;
+
+        // üçüncü soru grafiği gösterme
+        var chart11 = new CanvasJS.Chart("soruUc", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Ucuncu Sorunun Sonuçları",
+                fontSize: 20
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                indexLabelFontSize: 12,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: soruUcA, label: "Cevap A" },
+                    { y: soruUcB, label: "Cevap B" },
+                    { y: soruUcC, label: "Cevap C" }
+                ]
+            }]
+        });
+        chart11.render();
+
+        // dördüncü iki verilerini çekme
+        var soruDortA = parseFloat("@ViewData["percentASoruDort"]") || 0;
+        var soruDortB = parseFloat("@ViewData["percentBSoruDort"]") || 0;
+        var soruDortC = parseFloat("@ViewData["percentCSoruDort"]") || 0;
+
+        // ikinci soru grafiği gösterme
+        var chart11 = new CanvasJS.Chart("soruDort", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Dördüncü Sorunun Sonuçları",
+                fontSize: 20
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                indexLabelFontSize: 12,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: soruDortA, label: "Cevap A" },
+                    { y: soruDortB, label: "Cevap B" },
+                    { y: soruDortC, label: "Cevap C" }
+                ]
+            }]
+        });
+        chart11.render();
+
+
+
     </script>
 </body>
 </html>
