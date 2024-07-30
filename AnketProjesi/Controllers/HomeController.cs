@@ -32,6 +32,9 @@ namespace AnketProjesi.Controllers
             var cCount = await _context.Cevaplars.CountAsync(c => c.Cevap == "c");
 
             var total = aCount + bCount + cCount;
+            if(total == 0) {
+                total= 1;
+            }
 
             var percentA = ((double)aCount / total) * 100;
             var percentB = ((double)bCount / total) * 100;
@@ -41,32 +44,31 @@ namespace AnketProjesi.Controllers
             ViewData["percentB"] = percentB;
             ViewData["percentC"] = percentC;
 
-
-            //mühendislerin verileri
-            var anketIDs = await _context.Ankets.Where(a=>a.TurId ==1)
-                                                .Select(a=>a.AnketId)
-                                                .ToListAsync();
-
-           var aCountMuhendis = await _context.Cevaplars
-                               .Where(c => anketIDs.Contains((int)c.AnketId) && c.Cevap == "a")
+            //Ogrenciler
+            var anketIDsOgrenci = await _context.Ankets.Where(a => a.TurId == 5)
+                                                        .Select(a => a.AnketId)
+                                                        .ToListAsync();
+            var aCountOgrenci = await _context.Cevaplars
+                               .Where(c => anketIDsOgrenci.Contains((int)c.AnketId) && c.Cevap == "a")
                                .CountAsync();
-            var bCountMuhendis = await _context.Cevaplars
-                               .Where(c => anketIDs.Contains((int)c.AnketId) && c.Cevap == "b")
+            var bCountOgrenci = await _context.Cevaplars
+                               .Where(c => anketIDsOgrenci.Contains((int)c.AnketId) && c.Cevap == "b")
                                .CountAsync();
-            var cCountMuhendis = await _context.Cevaplars
-                               .Where(c => anketIDs.Contains((int)c.AnketId) && c.Cevap == "c")
+            var cCountOgrenci = await _context.Cevaplars
+                               .Where(c => anketIDsOgrenci.Contains((int)c.AnketId) && c.Cevap == "c")
                                .CountAsync();
-            var totalmuh = aCountMuhendis + bCountMuhendis+ cCountMuhendis;
-            if (totalmuh == 0)
-                totalmuh = 1;
+            var totalOgrenci = aCountOgrenci + bCountOgrenci + cCountOgrenci;
 
-            var percentAMuhendis = ((double)aCountMuhendis / totalmuh) * 100;
-            var percentBMuhendis = ((double)bCountMuhendis / totalmuh) * 100;
-            var percentCMuhendis = ((double)cCountMuhendis / totalmuh) * 100;
+            if(totalOgrenci == 0)
+                totalOgrenci = 1;
 
-            ViewData["percentAMuhendis"]=percentAMuhendis;
-            ViewData["percentBMuhendis"]= percentBMuhendis;
-            ViewData["percentCMuhendis"] = percentCMuhendis;
+            var percentAOgrenci = ((double)aCountOgrenci / totalOgrenci) * 100;
+            var percentBOgrenci = ((double)bCountOgrenci / totalOgrenci) * 100;
+            var percentCOgrenci = ((double)cCountOgrenci / totalOgrenci) * 100;
+
+            ViewData["percentAOgrenci"] = percentAOgrenci;
+            ViewData["percentBOgrenci"] = percentBOgrenci;
+            ViewData["percentCOgrenci"] = percentCOgrenci;
 
             //Kurum ici
             var anketIDsKurumici = await _context.Ankets.Where(a => a.TipId == 1)
@@ -82,6 +84,8 @@ namespace AnketProjesi.Controllers
                                .Where(c => anketIDsKurumici.Contains((int)c.AnketId) && c.Cevap == "c")
                                .CountAsync();
             var totalKurumici = aCountKurumici + bCountKurumici + cCountKurumici;
+            if(totalKurumici == 0)
+                totalKurumici = 1;
 
             var percentAKurumici = ((double)aCountKurumici / totalKurumici) * 100;
             var percentBKurumici = ((double)bCountKurumici / totalKurumici) * 100;
@@ -106,6 +110,9 @@ namespace AnketProjesi.Controllers
                                .Where(c => anketIDsKurumdisi.Contains((int)c.AnketId) && c.Cevap == "c")
                                .CountAsync();
             var totalKurumdisi = aCountKurumdisi + bCountKurumdisi + cCountKurumdisi;
+            
+            if(totalKurumdisi == 0)
+                totalKurumdisi = 1;
 
             var percentAKurumdisi = ((double)aCountKurumdisi / totalKurumdisi) * 100;
             var percentBKurumdisi = ((double)bCountKurumdisi / totalKurumdisi) * 100;
@@ -115,33 +122,117 @@ namespace AnketProjesi.Controllers
             ViewData["percentBKurumdisi"] = percentBKurumdisi;
             ViewData["percentCKurumdisi"] = percentCKurumici;
 
+            //mühendislerin verileri
+            var anketIDs = await _context.Ankets.Where(a => a.TurId == 1)
+                                                .Select(a => a.AnketId)
+                                                .ToListAsync();
 
-
-            //Ogrenciler
-            var anketIDsOgrenci = await _context.Ankets.Where(a => a.TurId == 5)
-                                                        .Select(a => a.AnketId)
-                                                        .ToListAsync();
-            var aCountOgrenci = await _context.Cevaplars
-                               .Where(c => anketIDsOgrenci.Contains((int)c.AnketId) && c.Cevap == "a")
+            var aCountMuhendis = await _context.Cevaplars
+                                .Where(c => anketIDs.Contains((int)c.AnketId) && c.Cevap == "a")
+                                .CountAsync();
+            var bCountMuhendis = await _context.Cevaplars
+                               .Where(c => anketIDs.Contains((int)c.AnketId) && c.Cevap == "b")
                                .CountAsync();
-            var bCountOgrenci = await _context.Cevaplars
-                               .Where(c => anketIDsOgrenci.Contains((int)c.AnketId) && c.Cevap == "b")
+            var cCountMuhendis = await _context.Cevaplars
+                               .Where(c => anketIDs.Contains((int)c.AnketId) && c.Cevap == "c")
                                .CountAsync();
-            var cCountOgrenci = await _context.Cevaplars
-                               .Where(c => anketIDsOgrenci.Contains((int)c.AnketId) && c.Cevap == "c")
+            var totalmuh = aCountMuhendis + bCountMuhendis + cCountMuhendis;
+            if (totalmuh == 0)
+                totalmuh = 1;
+
+            var percentAMuhendis = ((double)aCountMuhendis / totalmuh) * 100;
+            var percentBMuhendis = ((double)bCountMuhendis / totalmuh) * 100;
+            var percentCMuhendis = ((double)cCountMuhendis / totalmuh) * 100;
+
+            ViewData["percentAMuhendis"] = percentAMuhendis;
+            ViewData["percentBMuhendis"] = percentBMuhendis;
+            ViewData["percentCMuhendis"] = percentCMuhendis;
+
+
+            //Doktor verileri
+            var anketIDsDoktor = await _context.Ankets.Where(a => a.TurId == 2)
+                                                .Select(a => a.AnketId)
+                                                .ToListAsync();
+
+            var aCountDoktor = await _context.Cevaplars
+                                .Where(c => anketIDsDoktor.Contains((int)c.AnketId) && c.Cevap == "a")
+                                .CountAsync();
+            var bCountDoktor = await _context.Cevaplars
+                               .Where(c => anketIDsDoktor.Contains((int)c.AnketId) && c.Cevap == "b")
                                .CountAsync();
-            var totalOgrenci = aCountOgrenci + bCountOgrenci + cCountOgrenci;
+            var cCountDoktor = await _context.Cevaplars
+                               .Where(c => anketIDsDoktor.Contains((int)c.AnketId) && c.Cevap == "c")
+                               .CountAsync();
+            var totaldoktor = aCountDoktor + bCountDoktor + cCountDoktor;
+            if (totaldoktor == 0)
+                totaldoktor = 1;
 
-            var percentAOgrenci = ((double)aCountOgrenci / totalOgrenci) * 100;
-            var percentBOgrenci = ((double)bCountOgrenci / totalOgrenci) * 100;
-            var percentCOgrenci = ((double)cCountOgrenci / totalOgrenci) * 100;
+            var percentADoktor = ((double)aCountDoktor / totaldoktor) * 100;
+            var percentBDoktor = ((double)bCountDoktor / totaldoktor) * 100;
+            var percentCDoktor = ((double)cCountDoktor / totaldoktor) * 100;
 
-            ViewData["ogrenciA"] = percentAOgrenci;
-            ViewData["ogrenciB"] = percentBOgrenci;
-            ViewData["ogrenciC"] = percentCOgrenci;
+            ViewData["percentADoktor"] = percentADoktor;
+            ViewData["percentBDoktor"] = percentBDoktor;
+            ViewData["percentCDoktor"] = percentCDoktor;
+
+            // Memur verileri
+            var anketIDsMemur = await _context.Ankets
+                .Where(a => a.TurId == 3)
+                .Select(a => a.AnketId)
+                .ToListAsync();
+
+            var aCountMemur = await _context.Cevaplars
+                .Where(c => anketIDsMemur.Contains((int)c.AnketId) && c.Cevap == "a")
+                .CountAsync();
+
+            var bCountMemur = await _context.Cevaplars
+                .Where(c => anketIDsMemur.Contains((int)c.AnketId) && c.Cevap == "b")
+                .CountAsync();
+
+            var cCountMemur = await _context.Cevaplars
+                .Where(c => anketIDsMemur.Contains((int)c.AnketId) && c.Cevap == "c")
+                .CountAsync();
+
+            var totalMemur = aCountMemur + bCountMemur + cCountMemur;
+
+            // Yüzde hesaplama
+            var percentAMemur = totalMemur > 0 ? ((double)aCountMemur / totalMemur) * 100 : 0;
+            var percentBMemur = totalMemur > 0 ? ((double)bCountMemur / totalMemur) * 100 : 0;
+            var percentCMemur = totalMemur > 0 ? ((double)cCountMemur / totalMemur) * 100 : 0;
+
+            // ViewData ayarlama
+            ViewData["percentAMemur"] = percentAMemur;
+            ViewData["percentBMemur"] = percentBMemur;
+            ViewData["percentCMemur"] = percentCMemur;
 
 
-            //kurum disi 
+            //Müdür verileri
+            var anketIDsMudur = await _context.Ankets.Where(a => a.TurId == 4)
+                                                .Select(a => a.AnketId)
+                                                .ToListAsync();
+
+            var aCountMudur = await _context.Cevaplars
+                                .Where(c => anketIDsMudur.Contains((int)c.AnketId) && c.Cevap == "a")
+                                .CountAsync();
+
+            var bCountMudur = await _context.Cevaplars
+                               .Where(c => anketIDsMudur.Contains((int)c.AnketId) && c.Cevap == "b")
+                               .CountAsync();
+            var cCountMudur = await _context.Cevaplars
+                               .Where(c => anketIDsMudur.Contains((int)c.AnketId) && c.Cevap == "c")
+                               .CountAsync();
+            var totalmudur = aCountMudur + bCountMudur + cCountMudur;
+            if (totalmudur == 0)
+                totalmudur = 1;
+
+            var percentAMudur = ((double)aCountMudur / totalmudur) * 100;
+            var percentBMudur = ((double)bCountMudur / totalmudur) * 100;
+            var percentCMudur = ((double)cCountMudur / totalmudur) * 100;
+
+            ViewData["percentAMudur"] = percentAMudur;
+            ViewData["percentBMemur"] = percentBMudur;
+            ViewData["percentCMudur"] = percentCMudur;
+
 
             return View();
         }

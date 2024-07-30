@@ -61,7 +61,13 @@
             <div id="Muhendisler"></div>
         </div>
         <div class="chart">
-            <div id="YeniGrafik"></div>
+            <div id="Doktor"></div>
+        </div>
+        <div class="chart">
+            <div id="Memur"></div>
+        </div>
+        <div class="chart">
+            <div id="Mudur"></div>
         </div>
     </div>
 
@@ -80,7 +86,7 @@
                 fontSize: 20
             },
             data: [{
-                type: "pie",
+                type: "doughnut",
                 showInLegend: true,
                 legendText: "{label}",
                 indexLabelFontSize: 12,
@@ -95,13 +101,13 @@
         chart1.render();
 
         // ogrenciler
-        var ogrenciA = parseFloat("@ViewData["ogrenciA"]") || 0;
-        var ogrenciB = parseFloat("@ViewData["ogrenciB"]") || 0;
-        var ogrenciC = parseFloat("@ViewData["ogrenciC"]") || 0;
+        var ogrenciA = parseFloat("@ViewData["percentAOgrenci"]") || 0;
+        var ogrenciB = parseFloat("@ViewData["percentBOgrenci"]") || 0;
+        var ogrenciC = parseFloat("@ViewData["percentCOgrenci"]") || 0;
 
 
         // CanvasJS ile grafik oluşturma
-        var chart5 = new CanvasJS.Chart("Ogrenciler", {
+        var chart2 = new CanvasJS.Chart("Ogrenciler", {
             theme: "light2",
             animationEnabled: true,
             title: {
@@ -109,7 +115,7 @@
                 fontSize: 20
             },
             data: [{
-                type: "pie",
+                type: "doughnut",
                 showInLegend: true,
                 legendText: "{label}",
                 indexLabelFontSize: 12,
@@ -122,67 +128,6 @@
             }]
         });
 
-        chart5.render();
-
-
-        // Kurumdisi
-        var kurumdisiA = parseFloat("@ViewData["percentAKurumdisi"]") || 0;
-        var kurumdisiB = parseFloat("@ViewData["percentBKurumdisi"]") || 0;
-        var kurumdisiC = parseFloat("@ViewData["percentCKurumdisi"]") || 0;
-
-
-        // CanvasJS ile grafik oluşturma
-        var chart6 = new CanvasJS.Chart("KurumDisi", {
-            theme: "light2",
-            animationEnabled: true,
-            title: {
-                text: "Genel Anket Sonuçları",
-                fontSize: 20
-            },
-            data: [{
-                type: "pie",
-                showInLegend: true,
-                legendText: "{label}",
-                indexLabelFontSize: 12,
-                indexLabel: "{label} - {y}%",
-                dataPoints: [
-                    { y: kurumdisiA, label: "Cevap A" },
-                    { y: kurumdisiB, label: "Cevap B" },
-                    { y: kurumdisiC, label: "Cevap C" }
-                ]
-            }]
-        });
-
-        chart6.render();
-
-
-
-        // Mühendis anket verilerini çekme
-        var muhendisA = parseFloat("@ViewData["percentAMuhendis"]") || 0;
-        var muhendisB = parseFloat("@ViewData["percentBMuhendis"]") || 0;
-        var muhendisC = parseFloat("@ViewData["percentCMuhendis"]") || 0;
-
-        // Mühendis anket sonuçlarını gösterme
-        var chart2 = new CanvasJS.Chart("Muhendisler", {
-            theme: "light2",
-            animationEnabled: true,
-            title: {
-                text: "Mühendis Anket Sonuçları",
-                fontSize: 20
-            },
-            data: [{
-                type: "pie",
-                showInLegend: true,
-                legendText: "{label}",
-                indexLabelFontSize: 12,
-                indexLabel: "{label} - {y}%",
-                dataPoints: [
-                    { y: muhendisA, label: "Cevap A" },
-                    { y: muhendisB, label: "Cevap B" },
-                    { y: muhendisC, label: "Cevap C" }
-                ]
-            }]
-        });
         chart2.render();
 
         // Kurum içi anket verilerini çekme
@@ -213,17 +158,18 @@
         });
         chart3.render();
 
-        // Yeni grafik verilerini çekme (örnek veriler)
-        var yeniGrafikA = 30;
-        var yeniGrafikB = 50;
-        var yeniGrafikC = 20;
+        // Kurumdisi
+        var kurumdisiA = parseFloat("@ViewData["percentAKurumdisi"]") || 0;
+        var kurumdisiB = parseFloat("@ViewData["percentBKurumdisi"]") || 0;
+        var kurumdisiC = parseFloat("@ViewData["percentCKurumdisi"]") || 0;
 
-        // Yeni grafiği gösterme
-        var chart4 = new CanvasJS.Chart("YeniGrafik", {
+
+        // CanvasJS ile grafik oluşturma
+        var chart4 = new CanvasJS.Chart("KurumDisi", {
             theme: "light2",
             animationEnabled: true,
             title: {
-                text: "Yeni Grafik Sonuçları",
+                text: "Genel Anket Sonuçları",
                 fontSize: 20
             },
             data: [{
@@ -233,13 +179,129 @@
                 indexLabelFontSize: 12,
                 indexLabel: "{label} - {y}%",
                 dataPoints: [
-                    { y: yeniGrafikA, label: "Cevap A" },
-                    { y: yeniGrafikB, label: "Cevap B" },
-                    { y: yeniGrafikC, label: "Cevap C" }
+                    { y: kurumdisiA, label: "Cevap A" },
+                    { y: kurumdisiB, label: "Cevap B" },
+                    { y: kurumdisiC, label: "Cevap C" }
                 ]
             }]
         });
+
         chart4.render();
+
+
+
+        // Mühendis anket verilerini çekme
+        var muhendisA = parseFloat("@ViewData["percentAMuhendis"]") || 0;
+        var muhendisB = parseFloat("@ViewData["percentBMuhendis"]") || 0;
+        var muhendisC = parseFloat("@ViewData["percentCMuhendis"]") || 0;
+
+        // Mühendis anket sonuçlarını gösterme
+        var chart5 = new CanvasJS.Chart("Muhendisler", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Mühendis Anket Sonuçları",
+                fontSize: 20
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                indexLabelFontSize: 12,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: muhendisA, label: "Cevap A" },
+                    { y: muhendisB, label: "Cevap B" },
+                    { y: muhendisC, label: "Cevap C" }
+                ]
+            }]
+        });
+        chart5.render();
+
+       
+
+        //Doktor anket verilerini çekme
+        var doktorA = parseFloat("@ViewData["percentADoktor"]") || 0;
+        var doktorB = parseFloat("@ViewData["percentBDoktor"]") || 0;
+        var doktorC = parseFloat("@ViewData["percentCDoktor"]") || 0;
+
+        // doktor grafiği gösterme
+        var chart6 = new CanvasJS.Chart("Doktor", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Doktor Grafik Sonuçları",
+                fontSize: 20
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                indexLabelFontSize: 12,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: doktorA, label: "Cevap A" },
+                    { y: doktorB, label: "Cevap B" },
+                    { y: doktorC, label: "Cevap C" }
+                ]
+            }]
+        });
+        chart6.render();
+
+        //Memur anket verilerini çekme
+        var memurA = parseFloat("@ViewData["percentAMemur"]") || 0;
+        var memurB = parseFloat("@ViewData["percentBMemur"]") || 0;
+        var memurC = parseFloat("@ViewData["percentCMemur"]") || 0;
+
+        // doktor grafiği gösterme
+        var chart7 = new CanvasJS.Chart("Memur", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Memur Grafik Sonuçları",
+                fontSize: 20
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                indexLabelFontSize: 12,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: memurA, label: "Cevap A" },
+                    { y: memurB, label: "Cevap B" },
+                    { y: memurC, label: "Cevap C" }
+                ]
+            }]
+        });
+        chart7.render();
+
+        //Mudur anket verilerini çekme
+        var mudurA = parseFloat("@ViewData["percentAMudur"]") || 0;
+        var mudurB = parseFloat("@ViewData["percentBMudur"]") || 0;
+        var mudurC = parseFloat("@ViewData["percentCMudur"]") || 0;
+        // Mudur grafiği gösterme
+        var chart8 = new CanvasJS.Chart("Mudur", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Memur Grafik Sonuçları",
+                fontSize: 20
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                indexLabelFontSize: 12,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: mudurA, label: "Cevap A" },
+                    { y: mudurB, label: "Cevap B" },
+                    { y: mudurC, label: "Cevap C" }
+                ]
+            }]
+        });
+        chart8.render();
     </script>
 </body>
 </html>
