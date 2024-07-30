@@ -196,9 +196,9 @@ namespace AnketProjesi.Controllers
             var totalMemur = aCountMemur + bCountMemur + cCountMemur;
 
             // Yüzde hesaplama
-            var percentAMemur = totalMemur > 0 ? ((double)aCountMemur / totalMemur) * 100 : 0;
-            var percentBMemur = totalMemur > 0 ? ((double)bCountMemur / totalMemur) * 100 : 0;
-            var percentCMemur = totalMemur > 0 ? ((double)cCountMemur / totalMemur) * 100 : 0;
+            var percentAMemur = ((double)aCountMemur / totalMemur) * 100;
+            var percentBMemur = ((double)bCountMemur / totalMemur) * 100;
+            var percentCMemur = ((double)cCountMemur / totalMemur) * 100;
 
             // ViewData ayarlama
             ViewData["percentAMemur"] = percentAMemur;
