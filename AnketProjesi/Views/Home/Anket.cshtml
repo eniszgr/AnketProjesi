@@ -7,51 +7,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Kisi Bilgisi</title>
+    <title>Kişi Bilgisi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .form-container {
-            display: flex;
-            justify-content: center; /* Yatayda ortala */
-            align-items: center; /* Dikeyde ortala */
-            min-height: 100vh; /* Ekranın yüksekliğini kapsa */
-            padding: 20px;
-        }
-
-        .form-box {
-            width: 100%;
-            max-width: 600px; /* Formun genişliğini sınırlamak için */
-            border: 3px solid black;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge */
-            border-radius: 5px; /* Köşeleri yuvarlatmak için */
-            position: relative; /* Butonu sağ alt köşeye yerleştirmek için */
-        }
-
-        .sorular {
-            padding: 1vh;
-        }
-
-        .form-check {
-            text-align: left; /* Radio butonlarını sola hizala */
-            margin: 0 auto; /* Merkeziye al */
-        }
-
-        .submit-button-container {
-            position: absolute;
-            bottom: 10px; /* Sağ alt köşeden 10px yukarı */
-            right: 10px; /* Sağ alt köşeden 10px sağa */
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/anket.css">
+    
 </head>
 <body>
     <div class="form-container">
         <div class="form-box">
-            <form action="/Home/SubmitForm" class="form-group sorular" method="post">
+            <form action="/Home/SubmitForm" class="form-group" method="post">
                 <h2>Tip</h2>
-                <div class="d-flex flex-wrap justify-content-start">
+                <div class="d-flex flex-wrap">
                     @foreach (var item in ViewBag.Tip)
                     {
                         <div class="form-check me-3">
@@ -61,9 +29,7 @@
                     }
                 </div>
 
-                <br>
                 <h2>Meslek</h2>
-                <br>
                 @foreach (var item in ViewBag.Tur)
                 {
                     <div class="form-check">
@@ -71,28 +37,28 @@
                         <label class="form-check-label" for="@item.Value">@item.Text</label>
                     </div>
                 }
-                <br>
+
                 <h2>Sorular</h2>
-                <br>
                 @for (int i = 0; i < ViewBag.Sorular.Count; i++)
                 {
                     <div class="form-check">
                         <p>@ViewBag.Sorular[i].Text</p>
-                        <div class="form-check">
-                            <input type="radio" id="veryGood_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="a" class="form-check-input">
-                            <label for="veryGood_@ViewBag.Sorular[i].Value" class="form-check-label">Çok İyi</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" id="good_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="b" class="form-check-input">
-                            <label for="good_@ViewBag.Sorular[i].Value" class="form-check-label">İyi</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" id="bad_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="c" class="form-check-input">
-                            <label for="bad_@ViewBag.Sorular[i].Value" class="form-check-label">Kötü</label>
+                        <div class="d-flex flex-column">
+                            <div class="form-check">
+                                <input type="radio" id="veryGood_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="a" class="form-check-input">
+                                <label for="veryGood_@ViewBag.Sorular[i].Value" class="form-check-label">Çok İyi</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" id="good_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="b" class="form-check-input">
+                                <label for="good_@ViewBag.Sorular[i].Value" class="form-check-label">İyi</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" id="bad_@ViewBag.Sorular[i].Value" name="Sorular[@i].Rating" value="c" class="form-check-input">
+                                <label for="bad_@ViewBag.Sorular[i].Value" class="form-check-label">Kötü</label>
+                            </div>
                         </div>
                         <input type="hidden" name="Sorular[@i].QuestionId" value="@ViewBag.Sorular[i].Value" />
                     </div>
-                    <br>
                 }
                 <div class="submit-button-container">
                     <button type="submit" class="btn btn-primary">Gönder</button>
@@ -100,5 +66,8 @@
             </form>
         </div>
     </div>
+    <script>
+        alert("Bütün Sorulara Cevap Vermek Zorundasınız");
+    </script>
 </body>
 </html>

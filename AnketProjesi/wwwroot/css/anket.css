@@ -1,0 +1,45 @@
+﻿body {
+    background-color: #f8f9fa; /* Arka plan rengini açık gri yapmak */
+}
+
+.form-container {
+    display: flex;
+    justify-content: center; /* Yatayda ortala */
+    align-items: center; /* Dikeyde ortala */
+    min-height: 100vh; /* Ekranın yüksekliğini kapsa */
+    padding: 20px;
+}
+
+.form-box {
+    width: 80%;
+    max-width: 600px; /* Formun genişliğini sınırlamak için */
+    border: 1px solid #dee2e6; /* Daha ince ve açık renkli sınır */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+    border-radius: 8px; /* Köşeleri yuvarlatmak için */
+    background-color: #ffffff; /* Arka plan rengini beyaz yapmak */
+}
+
+.form-check {
+    margin-bottom: 10px; /* Her bir form-check öğesi arasında boşluk bırak */
+}
+
+.form-check-input {
+    margin-right: 10px; /* Radio butonları ve etiket arasına boşluk bırak */
+}
+
+.form-check-label {
+    margin-right: 20px; /* Etiketler arasında boşluk bırak */
+}
+
+.submit-button-container {
+    display: flex;
+    justify-content: flex-end; /* Butonu sağa hizala */
+    margin-top: 20px; /* Buton ile yukarıdaki içeriğin arasına boşluk bırak */
+}
+
+h2 {
+    margin-top: 20px; /* Başlıkların üstüne boşluk bırak */
+    margin-bottom: 15px; /* Başlıkların altına boşluk bırak */
+    font-size: 1.5rem; /* Başlık boyutunu büyüt */
+}

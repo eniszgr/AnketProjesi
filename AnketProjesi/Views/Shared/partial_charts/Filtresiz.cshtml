@@ -1,8 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Charts";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,21 +24,15 @@
             transition: background-color 0.3s ease, box-shadow 0.8s ease; /* Geçiş sürelerini ayarladık */
         }
 
-            .chart:hover {
-                background-color: #e9ecef;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            }
+        .chart:hover {
+            background-color: #e9ecef;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
 
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Genel Ortalama</h2>
-        <br />
-        <p>A yüzdesi: @string.Format("{0:F2}", ViewData["percentA"]) %</p>
-        <p>B yüzdesi: @string.Format("{0:F2}", ViewData["percentB"])%</p>
-        <p>C yüzdesi: @string.Format("{0:F2}", ViewData["percentC"])%</p>
-    </div>
 
     <div class="charts-container">
         <div class="chart">
@@ -230,7 +220,7 @@
         });
         chart5.render();
 
-       
+
 
         //Doktor anket verilerini çekme
         var doktorA = parseFloat("@ViewData["percentADoktor"]") || 0;
@@ -314,7 +304,7 @@
             }]
         });
         chart8.render();
-        
+
         // Soru Bir verilerini çekme
         var soruBirA = parseFloat("@ViewData["percentASoruBir"]") || 0;
         var soruBirB = parseFloat("@ViewData["percentBSoruBir"]") || 0;

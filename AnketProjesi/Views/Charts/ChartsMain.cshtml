@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewData["Title"] = "ChartsMain";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anket Sonuçları</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <style>
+        #partialViewContainer {
+            margin: 1vh;
+        }
+
+        /* Container'ı ortalamak için */
+        .btn-group-container {
+            text-align: center; /* İçeriği ortalar */
+        }
+
+        /* Buton grubunun içindeki butonlar */
+        .btn-group-container .btn {
+            height: 40px; /* Buton yüksekliği */
+            width: 250px; /* Buton genişliği */
+            margin: 0 5px; /* Butonlar arasındaki boşluk */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <div style="display: flex; justify-content: center;">
+            <h1>Anket Sonuçları</h1>
+        </div>
+
+        <br>
+        <div class="btn-group-container">
+            <button id="btnDeneme4" class="btn btn-warning">Bütün Tablolar</button>
+            <button id="btnDeneme3" class="btn btn-info">Genel Tablolar</button>
+            <button id="btnDeneme1" class="btn btn-primary">Sorulara Göre Filtrele</button>
+            <button id="btnDeneme2" class="btn btn-secondary">Mesleklere Göre Filtrele</button>
+        </div>
+
+        <div id="partialViewContainer">
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#btnDeneme1").click(function () {
+                $.ajax({
+                    url: '@Url.Action("SorularCharts", "Charts")',
+                    type: 'GET',
+                    success: function (data) {
+                        $("#partialViewContainer").html(data);
+                    }
+                });
+            });
+
+            $("#btnDeneme2").click(function () {
+                $.ajax({
+                    url: '@Url.Action("MesleklerCharts", "Charts")',
+                    type: 'GET',
+                    success: function (data) {
+                        $("#partialViewContainer").html(data);
+                    }
+                });
+            });
+
+            $("#btnDeneme3").click(function () {
+                $.ajax({
+                    url: '@Url.Action("GenelTablo", "Charts")',
+                    type: 'GET',
+                    success: function (data) {
+                        $("#partialViewContainer").html(data);
+                    }
+                });
+            });
+
+            $("#btnDeneme4").click(function () {
+                $.ajax({
+                    url: '@Url.Action("Filtresiz", "Charts")',
+                    type: 'GET',
+                    success: function (data) {
+                        $("#partialViewContainer").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
