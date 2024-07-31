@@ -43,6 +43,8 @@ Bu proje, kurum içindeki memnuniyet durumunu değerlendirmek amacıyla hazırla
 
 **Not:** Kullandığım projeyi "anket3.bacpac" adı ile projey ekledim. 
 MSSQL'de kurduktan sonra appsettings.json ve program.cs dosyalarındaki server isimlerini değiştirerek kullanabilirsiniz.
+Ayrıca CodeFirst ile değil Scaffold ile yazılmıştır. O koduda txt olarak ekledim.
+
 
 ## Lisans
 Proje bana aittir.
