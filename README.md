@@ -6,7 +6,7 @@ Bu proje, kurum içindeki memnuniyet durumunu değerlendirmek amacıyla hazırla
 
 - [Özellikler](#özellikler)
 - [Kullanılan Teknolojiler](#kullanılan-teknolojiler)
-- [Program İçi Görüntüler](#program-ici-goruntuler)
+- [Program İçi Görüntüler](#Program İçi Görüntüler)
 - [Lisans](#lisans)
 
 ## Özellikler
