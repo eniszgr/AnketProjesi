@@ -17,7 +17,8 @@
 <body>
     <div class="form-container">
         <div class="form-box">
-            <form action="/Home/SubmitForm" class="form-group" method="post">
+            <form action="/Home/SubmitForm" class="form-group" method="post" id="surveyForm">
+               
                 <h2>Tip</h2>
                 <div class="d-flex flex-wrap">
                     @foreach (var item in ViewBag.Tip)
@@ -60,6 +61,8 @@
                         <input type="hidden" name="Sorular[@i].QuestionId" value="@ViewBag.Sorular[i].Value" />
                     </div>
                 }
+                <input type="hidden" id="totalQuestions" value="@ViewBag.Sorular.Count" /> <!-- Soruların toplam sayısını ekleyin -->
+                
                 <div class="submit-button-container">
                     <button type="submit" class="btn btn-primary">Gönder</button>
                 </div>
@@ -67,7 +70,17 @@
         </div>
     </div>
     <script>
-        alert("Bütün Sorulara Cevap Vermek Zorundasınız");
+        document.getElementById('surveyForm').addEventListener('submit', function (event) {
+            // Toplamda 6 adet seçili radio butonu olup olmadığını kontrol et
+            var selectedRadioCount = document.querySelectorAll('input[type="radio"]:checked').length;
+            var totalQuestions = parseInt(document.getElementById('totalQuestions').value);
+            if (selectedRadioCount < totalQuestions+2) {
+                // Kullanıcıyı bilgilendir
+                alert("Lütfen tüm sorulara cevap veriniz.");
+                // Sayfanın yeniden yüklenmesi yerine formu geri gönder
+                event.preventDefault(); // Formun gönderilmesini durdur
+            }
+        });
     </script>
 </body>
 </html>
