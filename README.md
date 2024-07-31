@@ -27,8 +27,10 @@ Bu proje, kurum içindeki memnuniyet durumunu değerlendirmek amacıyla hazırla
 
 
 ## Program İçi Görüntüler
+
 -- Veri Tabanı Dizaynı
-![image](https://github.com/user-attachments/assets/c8098217-2868-4f7f-8c17-eeda355fd7c8)
+![image](https://github.com/user-attachments/assets/da5e15b6-d3e0-428f-887e-ff3ce5a5d1bc)
+
 
 --SSS Sayfası
 ![image](https://github.com/user-attachments/assets/88d4ea59-79fb-4e9c-a8b5-b0c420dd8298)
