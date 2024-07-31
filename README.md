@@ -16,7 +16,7 @@ Bu proje, kurum içindeki memnuniyet durumunu değerlendirmek amacıyla hazırla
 - Cevapların veritabanına kaydedilmesi
 - CanvasJS ile anket sonuçlarını grafikler üzerinden açıkça görünmesi
 
-## Kullanılan-Teknolojiler
+## Kullanılan Teknolojiler
 
 - .NET Core
 - MSSQL
